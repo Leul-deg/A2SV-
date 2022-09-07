@@ -1,0 +1,19 @@
+class Solution:
+    def smallerNumbersThanCurrent(self, nums: List[int]) -> List[int]:
+        the_dict = {}
+        original = nums.copy()
+        nums.sort()
+        for index,num in enumerate(nums):
+            if num in the_dict:
+                continue
+            
+            the_dict[num] = index
+        output = []
+        for num in original:
+            output.append(the_dict[num])
+        return output
+    #O(n) Solution.
+            
+            
+        
+        
