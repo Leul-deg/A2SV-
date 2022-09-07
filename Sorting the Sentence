@@ -1,0 +1,30 @@
+class Solution:
+    def sortSentence(self, s: str) -> str:
+        word_list=[None]*201
+        i  = 0
+        word = ""
+        while i < len(s):
+            
+            if ord(s[i])>48 and ord(s[i])<58:
+                word_list[int(s[i])]= word
+                word = ""
+                i+=2
+            else:
+                word+=s[i]
+                i+=1
+        output = ""
+        i=1
+        
+        while i < len(s):
+            if not word_list[i]:
+                break
+            output+=word_list[i]
+            output+=" "
+            i+=1
+        return output[:len(output)-1]
+                
+         
+
+            
+            
+        
