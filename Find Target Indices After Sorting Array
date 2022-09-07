@@ -1,0 +1,18 @@
+class Solution:
+    def targetIndices(self, nums: List[int], target: int) -> List[int]:
+        freq = 0
+        less = 0
+        for num in nums:
+            if target> num:
+                less+=1
+            elif target == num:
+                freq+=1
+        output = []
+        for index in range(less, less+freq):
+            output.append(index)
+        return output
+        #O(n) solution
+        #constant memory besides the return value
+        
+        
+            
