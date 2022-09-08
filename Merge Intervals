@@ -1,0 +1,25 @@
+class Solution:
+    def merge(self, intervals: List[List[int]]) -> List[List[int]]:
+        intervals.sort(key = lambda x : x[0])
+        l = 0
+        cur = intervals[0]
+        pointer = 1
+        answer = []
+        while pointer < len(intervals):
+            if intervals[pointer][0] <= cur[1]:
+                cur[1] = max(intervals[pointer][1] , cur[1])
+                pointer +=1
+               
+                
+           
+              
+            else:
+                answer.append(cur)
+                
+                cur = intervals[pointer]
+                pointer +=1
+        if not answer:
+            answer.append(cur)
+        if cur!= answer[-1]:
+            answer.append(cur)
+        return answer
