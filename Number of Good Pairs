@@ -1,0 +1,19 @@
+class Solution:
+    def numIdenticalPairs(self, nums: List[int]) -> int:
+        freq = {}
+        goodpair = {}
+        for num in nums:
+            if num in freq:
+                freq[num]+=1
+            else:
+                freq[num]= 1
+        for num in freq:
+            frequency = freq[num]
+            pairs = frequency*(frequency-1)//2
+            goodpair[num]= pairs
+        output = 0 
+        for num in goodpair:
+            output+=goodpair[num]
+        return output
+        
+        
