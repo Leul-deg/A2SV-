@@ -1,0 +1,17 @@
+class Solution:
+    def rearrangeArray(self, nums: List[int]) -> List[int]:
+        nums.sort()
+        l,r = 0, len(nums)-1
+        output = []
+        while l < r:
+            output.append(nums[l])
+            output.append(nums[r])
+            l+=1
+            r-=1
+        if len(nums)%2!=0:
+            output.append(nums[l])
+        return output
+            
+            
+        
+        
