@@ -1,0 +1,16 @@
+class Solution:
+    def isValid(self, s: str) -> bool:
+        dicto= {"(":")", "{":"}", "[":"]"}
+        opener = [")", "}", "]"]
+        stack = []
+        
+        for i in s:
+            if i in dicto:
+                stack+=[dicto[i]]
+            elif i in opener:
+                if not stack or stack.pop()!=i:
+                    return False
+        return len(stack) == 0
+                
+    
+            
