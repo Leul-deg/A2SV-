@@ -1,0 +1,15 @@
+def insertionSort1(n, array):
+    if n == 1:
+        print()
+    # Write your code here
+    value = array[n-1]
+    i = n -2
+    while value < array[i] and i > -1:
+        array[i+1] = array[i]
+        i -=1
+        for num in array:
+            print(num, end = " ")
+        print()
+    array[i+1] =value
+    for num in array:
+        print(num, end = " ")
