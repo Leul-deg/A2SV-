@@ -1,0 +1,20 @@
+class Solution:
+    def minSetSize(self, arr: List[int]) -> int:
+        c = Counter(arr)
+        freq = []
+        for num in c:
+            freq.append([num,c[num]])
+    
+        freq.sort(reverse = True , key = lambda x : x[1])
+        
+        half = len(arr)//2
+        output = 0
+        removed = 0
+        
+        for val,frequency in freq:
+            output+=1
+            removed+=frequency
+            if removed>= half:
+                return output
+            
+            
