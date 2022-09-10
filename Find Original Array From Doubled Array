@@ -1,0 +1,21 @@
+class Solution:
+    def findOriginalArray(self, changed: List[int]) -> List[int]:
+        c = Counter(changed)
+        nums = sorted(list(set(changed)))
+        output = []
+        for num in nums:
+            if num == 0:
+                if c[num]%2==0:
+                    for i in range(c[num]//2):
+                        output.append(0)
+                    continue
+                else:
+                    return []
+            if c[num]>0:
+                if num*2 in c and c[num*2] >= c[num]:
+                    c[num*2] -= c[num]
+                    for i in range(c[num]):
+                        output.append(num)
+                else:
+                    return []
+        return output
