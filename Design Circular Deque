@@ -1,0 +1,92 @@
+class MyCircularDeque:
+
+    def __init__(self, k: int):
+        self.deque = [None]*k
+        self.size =0 
+        self.front = 0
+        
+        
+
+    def insertFront(self, value: int) -> bool:
+        if self.size== 0:
+            self.size +=1
+            self.deque[self.front] = value
+            return True
+        if self.size < len(self.deque):
+            self.deque[self.front-1] = value
+            self.size+=1
+            self.front-=1
+            return True
+        return False
+            
+        
+
+    def insertLast(self, value: int) -> bool:
+        k = len(self.deque)
+        if self.size < k:
+            last = (self.front+self.size)%k
+            self.deque[last] = value
+            self.size+=1
+            return True
+        return False
+        
+        
+        
+
+    def deleteFront(self) -> bool:
+        k = len(self.deque)
+        if self.size > 0:
+            self.deque[self.front] = None
+            self.front = (self.front+1)% k
+            self.size-=1
+            return True
+        return False
+            
+            
+            
+        
+
+    def deleteLast(self) -> bool:
+        k = len(self.deque)
+        last = (self.front+self.size)%k - 1
+        if self.deque[last] != None:
+            self.size-=1
+            self.deque[last] = None
+            return True
+        return False
+        
+        
+
+    def getFront(self) -> int:
+        if self.size:
+            return self.deque[self.front]
+        return -1
+        
+
+    def getRear(self) -> int:
+        k = len(self.deque)
+        if self.size>0:
+            last = (self.front+self.size)%k - 1
+            return self.deque[last]
+        return -1
+        
+
+    def isEmpty(self) -> bool:
+        return self.size == 0
+        
+
+    def isFull(self) -> bool:
+        return self.size == len(self.deque)
+        
+
+
+# Your MyCircularDeque object will be instantiated and called as such:
+# obj = MyCircularDeque(k)
+# param_1 = obj.insertFront(value)
+# param_2 = obj.insertLast(value)
+# param_3 = obj.deleteFront()
+# param_4 = obj.deleteLast()
+# param_5 = obj.getFront()
+# param_6 = obj.getRear()
+# param_7 = obj.isEmpty()
+# param_8 = obj.isFull()
