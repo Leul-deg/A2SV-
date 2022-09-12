@@ -1,0 +1,19 @@
+class Solution:
+    def lengthOfLongestSubstring(self, s: str) -> int:
+        #Sliding window O(n) time complexity
+        container = set()
+        l,r,freq  = 0,0,0
+        while r < len(s):
+            
+            while s[r] in container and l<r:
+                container.remove(s[l])
+                l+=1
+            container.add(s[r])
+                
+           
+            freq  = max(freq, len(container))
+            r+=1
+        return freq
+        
+            
+        
