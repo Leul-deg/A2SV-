@@ -1,0 +1,23 @@
+class Solution:
+    def minimumBuckets(self, street: str) -> int:
+        last = -2
+        index = 0
+        output = 0
+        while index < len(street):
+            char = street[index]
+            if char ==".":
+                index+=1
+                continue
+            elif index-1 == last:
+                index+=1
+                continue
+            elif index+1 < len(street) and street[index+1]==".":
+                output +=1
+                last = index+1
+            elif index - 1 > -1 and street[index-1] == ".":
+                output+=1
+                last = index - 1
+            else:
+                return -1
+            index+=1
+        return output
