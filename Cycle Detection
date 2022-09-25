@@ -1,0 +1,9 @@
+def has_cycle(head):
+    store = set()
+    cur = head ;
+    while cur:
+        if cur in store:
+            return 1
+        store.add(cur)
+        cur = cur.next
+    return 0
