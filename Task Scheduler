@@ -1,0 +1,31 @@
+class Solution:
+    def leastInterval(self, tasks: List[str], n: int) -> int:
+        my_task = 0
+        collect = []
+        c = Counter(tasks)
+        heap  = [[-1*freq,task] for task, freq in c.items()]
+        heapq.heapify(heap)
+        count = 0
+        while heap:
+            temp = n+1
+            task_temp = []
+            while temp>0 and my_task < len(tasks):
+                if heap:
+                    freq, task = heapq.heappop(heap)
+                    collect.append(task)
+                    task_temp.append([freq+1 , task])
+                    my_task += 1
+                count += 1
+                temp -= 1
+            for freq, task in task_temp:
+                    if freq < 0:
+                        heapq.heappush(heap, [freq, task])
+        return count
+                    
+                    
+                
+            
+            
+        
+        
+        
