@@ -1,0 +1,39 @@
+class Solution:
+    def totalFruit(self, fruits: List[int]) -> int:
+        if len(fruits) == 1:
+            return 1
+        basket_1 , basket_2 = 0,0
+        
+        while basket_2<len(fruits) and fruits[basket_1] == fruits[basket_2]:
+            basket_2 += 1
+        if basket_2 == len(fruits):
+            return len(fruits)
+        max_count = basket_2 - basket_1 + 1
+        count = max_count
+        index = basket_2  + 1
+        basket_1 = basket_2 -1
+        while index< len(fruits):
+            if fruits[index] == fruits[basket_1]:
+                basket_1 = index
+            elif fruits[index] == fruits[basket_2]:
+                basket_2 = index
+            else:
+                if basket_2>basket_1:
+                    count = basket_2 - basket_1
+                    basket_1 = index
+                else:
+                    count  = basket_1 - basket_2
+                    basket_2 = index
+            count += 1
+            if count == 7:
+                print(index)
+            max_count = max(max_count , count)
+            index += 1
+        return max_count
+                    
+            
+        
+            
+                
+            
+        
