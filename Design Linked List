@@ -1,0 +1,78 @@
+class Node:
+    def __init__(self,val):
+        self.val = val
+        self.prev , self.next = None , None
+        
+class MyLinkedList:
+
+    def __init__(self):
+        self.left , self.right = Node(0), Node(1)
+        self.left.next , self.right.prev  = self.right , self.left
+        self.size = 0
+        
+
+    def get(self, index: int) -> int:
+        if index >= self.size:
+            return -1
+        cur = self.left.next
+        cur_index = 0
+        while cur_index <index:
+            cur = cur.next
+            cur_index +=1
+        return cur.val
+
+    def addAtHead(self, val: int) -> None:
+        left , right = self.left , self.left.next
+        node = Node(val)
+        left.next , right.prev = node , node
+        node.prev , node.next = left , right
+        self.size += 1
+        
+        
+
+    def addAtTail(self, val: int) -> None:
+        left , right = self.right.prev , self.right
+        node = Node(val)
+        left.next , right.prev = node , node
+        node.prev , node.next = left , right
+        self.size += 1
+        
+        
+
+    def addAtIndex(self, index: int, val: int) -> None:
+        cur_index = 0
+        cur = self.left
+        if self.size >= index:
+            while cur_index < index and cur:
+                cur = cur.next
+                cur_index += 1
+            left = cur 
+            right = left.next
+            node = Node(val)
+            left.next , right.prev = node , node
+            node.prev , node.next = left , right
+            self.size += 1
+        
+        
+
+    def deleteAtIndex(self, index: int) -> None:
+        if index < self.size:
+            cur = self.left.next
+            cur_index = 0
+            while cur_index < index:
+                cur = cur.next
+                cur_index += 1
+            left,right = cur.prev , cur.next
+            left.next , right.prev = right , left
+            self.size -=1
+        
+        
+
+
+# Your MyLinkedList object will be instantiated and called as such:
+# obj = MyLinkedList()
+# param_1 = obj.get(index)
+# obj.addAtHead(val)
+# obj.addAtTail(val)
+# obj.addAtIndex(index,val)
+# obj.deleteAtIndex(index)
