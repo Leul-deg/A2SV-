@@ -1,0 +1,74 @@
+class Node:
+    def __init__(self,key,value):
+        self.key , self.val = key , value
+        self.prev , self.next = None , None
+        self.freq = 0
+
+class Doubly:
+    def __init__(self):
+        self.left , self.right = Node(0,0) , Node(1,1)
+        self.left.next , self.right.prev = self.right , self.left
+        self.len = 0
+        
+        
+class LFUCache:
+    def __init__(self, capacity: int):
+        self.cache = {}
+        self.cap = capacity
+        self.freq_list = {}
+        self.min = 1 
+    
+
+        
+    def get(self, key: int) -> int:
+        if key in self.cache:
+            self.remove(self.cache[key])
+            self.insert(self.cache[key])
+            return self.cache[key].val
+        return  -1
+
+    
+        
+
+    def put(self, key: int, value: int) -> None:
+        if self.cap > 0:
+            if key in self.cache:
+                self.cache[key].val = value
+                self.remove(self.cache[key])
+                self.insert(self.cache[key])
+            else:
+                if len(self.cache) >= self.cap:
+                    lfu =self.freq_list[self.min].left.next
+                    self.remove(lfu)
+                    del self.cache[lfu.key]
+                self.cache[key] = Node(key,value)
+                self.insert(self.cache[key])
+    def insert(self,node):
+        node.freq += 1
+        if node.freq not in self.freq_list:
+            self.freq_list[node.freq] = Doubly()
+        inserting = self.freq_list[node.freq]
+        left, right = inserting.right.prev , inserting.right
+        node.prev , node.next = left , right
+        left.next , right.prev = node, node
+        inserting.len += 1
+        if node.freq < self.min:
+            self.min = node.freq
+    def remove(self,node):
+        left , right = node.prev , node.next
+        left.next,right.prev = right , left
+        removing = self.freq_list[node.freq]
+        if node.freq == self.min and removing.len -1 ==0:
+            self.min += 1
+        removing.len -= 1
+                
+                    
+        
+
+                
+
+
+# Your LFUCache object will be instantiated and called as such:
+# obj = LFUCache(capacity)
+# param_1 = obj.get(key)
+# obj.put(key,value)
