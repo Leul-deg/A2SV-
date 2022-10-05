@@ -1,0 +1,24 @@
+class Solution:
+    def longestMountain(self, arr: List[int]) -> int:
+        up = 0
+        down = 0 
+        max_mountain = 0
+        index = 0
+        while index < len(arr) - 1:
+            if arr[index+1] > arr[index]:
+                if down:
+                    up = 0
+                    down = 0
+                up += 1
+            elif arr[index+1] < arr[index]:
+                down += 1
+            else:
+                up = 0
+                down = 0
+            if up and down:
+                max_mountain = max(max_mountain, up+down + 1)
+            index += 1
+        return max_mountain
+                
+            
+        
