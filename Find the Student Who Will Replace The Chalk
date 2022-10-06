@@ -1,0 +1,9 @@
+class Solution:
+    def chalkReplacer(self, chalk: List[int], k: int) -> int:
+        total = sum(chalk)
+        total = k % total
+        for index , c in enumerate(chalk):
+            total -= c
+            if total < 0:
+                return index
+            
