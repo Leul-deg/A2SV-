@@ -1,0 +1,18 @@
+class Solution:
+    def longestSubarray(self, nums: List[int]) -> int:
+        l,r,rem,max_count  = 0 , 0 , 1, 0
+        last_removed = -1
+        while r < len(nums):
+                if nums[r] == 0 and rem == 1:
+                    rem -= 1
+                    last_removed = r
+                elif nums[r] == 0 and rem < 1:
+                    l = last_removed + 1
+                    last_removed = r
+                max_count = max(max_count , r - l)
+                r += 1
+                
+        if last_removed == -1:
+            return len(nums) - 1
+        return max_count
+            
