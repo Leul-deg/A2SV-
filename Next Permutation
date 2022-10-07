@@ -1,0 +1,38 @@
+class Solution:
+    def nextPermutation(self, nums: List[int]) -> None:
+        """
+        Do not return anything, modify nums in-place instead.
+        """
+        def sort_part(l,a):
+            for i in range(len(a) - l):
+                for j in range(l,len(a)-i-1):
+                    if a[j]>a[j+1]:
+                        a[j],a[j+1]=a[j+1],a[j]
+            
+        def next(arr):
+            res = []
+            
+            
+            for index  , num in enumerate(arr):
+                change = float(inf)
+                for index2 in range(index, len(arr)):
+                    num2 = arr[index2]
+                    if num2 > num:
+                        if num2 < change:
+                            res = [index , index2]
+            return res
+        ans = next(nums)
+        if len(ans) == 2:
+            index1,index2 = ans
+            nums[index1] , nums[index2]  = nums[index2] , nums[index1]
+            sort_part(index1+1 , nums)
+            
+            
+          
+        else:
+            nums.sort()
+            return nums
+                    
+                    
+                
+        
