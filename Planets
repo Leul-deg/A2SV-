@@ -1,0 +1,19 @@
+from collections import Counter
+# n = int(input())
+# nq=list(map(int,input().split()))
+# arr=list(map(int,input().split()))
+t = int(input())
+for _ in range(t):
+    n,c = list(map(int,input().split()))
+    planets = list(map(int,input().split()))
+    planet_count = Counter(planets)
+
+    total_cost = 0
+    for no_of_planets in planet_count.values():
+        if no_of_planets < c:
+            total_cost += no_of_planets
+        else:
+            total_cost += c
+    print(total_cost)
+
+    
