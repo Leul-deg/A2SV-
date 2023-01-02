@@ -3,7 +3,7 @@ class Solution:
         capital, small = 0 , 0 
         for char in word:
             asci = ord(char)
-            if 64 < asci < 91:
+            if char.isupper():
                 if small:
                     return False
                 capital += 1
