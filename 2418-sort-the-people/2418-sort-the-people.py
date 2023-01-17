@@ -7,18 +7,12 @@ class Solution:
         #             if j+1 < len(array) and array[j] < array[j+1]:
         #                 array[j] , array[j+1] = array[j+1] , array[j]
         # bubble_sort(heights)
-        def selection_sort(array):
-            def min_index(arr):
-                cur_min = arr[0]
-                min_idx = 0
-                for idx in range(len(arr)):
-                    if cur_min > arr[idx]:
-                        min_idx = idx
-                        cur_min = arr[idx]
-                return min_idx
-            for i in range(len(array)):
-                min_idx = min_index(array[:len(array) - i])
-                array[min_idx] , array[len(array) - 1 - i] = array[len(array) - 1 - i]  , array[min_idx]
-        
-        selection_sort(heights)
+        def insertion_sort(array):
+            for idx in range(len(array)):
+                cur = idx
+                while cur > 0 and array[cur-1] < array[cur]:
+                    array[cur-1] , array[cur]  = array[cur] , array[cur - 1]
+                    cur -= 1
+                    
+        insertion_sort(heights)
         return [hashmap[height] for height in heights]
