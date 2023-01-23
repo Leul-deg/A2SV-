@@ -1,0 +1,22 @@
+class Solution:
+    def findSubsequences(self, nums: List[int]) -> List[List[int]]:
+        n = len(nums)
+        res = set()
+        def backtrack(store, start):
+            if len(store) > 1:
+                res.add(tuple(store))
+            if start == n:
+                return
+            for idx in range(start , n):
+                cur_num = nums[idx]
+                if store[-1] <= cur_num:
+                    backtrack(store + [cur_num], idx + 1)
+
+                
+        
+        
+        for i in range(len(nums)):
+            backtrack([nums[i]], i+1)
+        
+        return [list(tup) for tup in res]
+        
