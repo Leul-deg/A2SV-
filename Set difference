@@ -1,0 +1,11 @@
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+english = int(input())
+english_stds = set(list(map(int, input().split())))
+french = int(input())
+french_stds = set(list(map(int, input().split())))
+count  = 0
+for std in english_stds:
+    if std not in french_stds:
+        count += 1
+print(count)
+
