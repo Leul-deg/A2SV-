@@ -1,0 +1,8 @@
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+f = int(input())
+french = set(list(map(int, input().split())))
+e= int(input())
+english = set(list(map(int, input().split())))
+inter = len(french.intersection(english))
+print(len(french) + len(english) - inter)
+
