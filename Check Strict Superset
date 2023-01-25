@@ -1,0 +1,25 @@
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+A = list(map(int, input().split()))
+a_set = set(A)
+n  = int(input())
+total = set()
+flag = False
+for _ in range(n):
+    new = set(list(map(int, input().split())))
+    for num in new:
+        if num not in a_set or len(a_set) <= len(new):
+            flag = True
+            print(False)
+            break
+    if flag:
+        break
+else:
+    print(True)
+    
+    
+    
+
+
+
+    
+    
