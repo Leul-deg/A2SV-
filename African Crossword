@@ -1,0 +1,47 @@
+from collections import Counter
+n ,m = list(map(int, input().split()))
+grid = []
+for _ in range(n):
+    grid.append(list(input()))
+rows = {}
+for r in range(n):
+    row = grid[r]
+    rows[r] = Counter(row)
+ 
+for idx , hashmap in rows.items():
+    to_be_removed = set()
+    for key , value in hashmap.items():
+        if value > 1:
+            to_be_removed.add(key)
+    rows[idx] = to_be_removed
+ 
+ 
+cols = {}
+for c in range(m):
+    cols[c] = {}
+    for r in range(n):
+        cur_letter = grid[r][c]
+        cols[c][cur_letter] = cols[c].get(cur_letter, 0) + 1
+ 
+for idx , hashmap in cols.items():
+    to_be_removed = set()
+ 
+    for key , value in hashmap.items():
+        if value > 1:
+            to_be_removed.add(key)
+    cols[idx] = to_be_removed
+# print(cols)
+for c in range(m):
+    for r in range(n):
+        cur_letter = grid[r][c]
+        if cur_letter in cols[c]:
+            grid[r][c] = ""
+ 
+for r in range(n):
+    for c in range(m):
+        cur_letter = grid[r][c]
+        if cur_letter in rows[r]:
+            grid[r][c] = ""
+ 
+new_grid = ["".join(word) for word in grid]
+print("".join(new_grid))
