@@ -1,18 +1,16 @@
 class Solution:
-    def maxOperations(self, nums: List[int], target: int) -> int:
-        c = Counter(nums)
-        seen = set()
-        output = 0
-        for num in c:
-            if num not in seen and  (target - num) in c:
-                if target - num == num:
-                    seen.add(num)
-                    output+=c[num]//2
-                else:
-                    seen.add(num)
-                    seen.add(target-num)
-                    output+= min(c[num], c[target - num])
-        return output
-                
-        
-        
+    def maxOperations(self, nums: List[int], k: int) -> int:
+        nums.sort()
+        l , r = 0 , len(nums)-1
+        pairs= 0
+        while l < r:
+            add = nums[l] + nums[r]
+            if add == k:
+                pairs += 1
+                l += 1
+                r -= 1
+            elif add > k:
+                r-= 1
+            else:
+                l+= 1
+        return pairs
