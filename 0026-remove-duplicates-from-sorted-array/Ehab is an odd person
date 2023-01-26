@@ -1,0 +1,13 @@
+n = int(input())
+nums = list(map(int, input().split()))
+evens = 0
+odds = 0
+for num in nums:
+    if num % 2:
+        odds += 1
+    else:
+        evens += 1
+if evens and odds:
+    print(*sorted(nums))
+else:
+    print(*nums)
