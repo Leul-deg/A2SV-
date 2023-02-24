@@ -1,0 +1,20 @@
+t = int(input())
+for _ in range(t):
+    n = int(input())
+    arr = []
+    for  r in range(n):
+        arr.append(input())
+ 
+    word_set = set(arr)
+ 
+    ans = []
+ 
+    for word in arr:
+        for i in range(len(word)):
+            if word[:i] in word_set and word[i:] in word_set:
+                ans.append('1')
+                break
+        else:
+            ans.append('0')
+    
+    print("".join(ans))
