@@ -1,0 +1,24 @@
+from collections import Counter
+n_boys = int(input())
+boys = list(map(int, input().split()))
+n_girls = int(input())
+girls = list(map(int, input().split()))
+girl_hash = Counter(girls)
+boys.sort(reverse = True)
+match = 0
+# print(boys)
+ 
+for boy in boys:
+    if girl_hash.get(boy + 1 , 0):
+        girl_hash[boy+1] -= 1
+        match += 1
+    
+    elif girl_hash.get(boy  , 0):
+        girl_hash[boy] -= 1
+        match += 1
+    
+    elif girl_hash.get(boy - 1 , 0):
+        girl_hash[boy-1] -= 1
+        match += 1
+ 
+print(match)
