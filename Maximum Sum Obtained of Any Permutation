@@ -1,0 +1,35 @@
+class Solution:
+    def maxSumRangeQuery(self, nums: List[int], requests: List[List[int]]) -> int:
+        MOD = 10**9 + 7
+        prefix = [0] * (len(nums) + 1)
+        for l , r in requests:
+            prefix[l] += 1
+            prefix[r+1] -= 1
+        
+        prefix.pop()
+        
+        count = list(accumulate(prefix))
+
+        
+        
+        # print(count)
+        count = [(idx , freq) for idx , freq in enumerate(count)]
+        count.sort(key = lambda x : x[1])
+        nums.sort()
+        new = [0] * len(nums)
+        # print(new , count , nums)
+        
+        while nums:
+            idx , freq  = count.pop()
+            new[idx] = nums.pop()
+        
+        final_prefix = list(accumulate([0] + new))
+        res = 0 
+        for l , r  in requests:
+            res += final_prefix[r+1] - final_prefix[l]
+        
+        return res % MOD
+        
+        # print(new)
+        # return 0
+        
