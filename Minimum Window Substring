@@ -1,0 +1,29 @@
+class Solution:
+    def minWindow(self, s: str, t: str) -> str:
+        window, l = {}, 0
+        t_count = Counter(t)
+        have , need = 0 , len(t_count)
+        i , j = 0 , len(s)
+        flag = False
+        for r in range(len(s)):
+            window[s[r]] = window.get(s[r], 0 ) + 1
+            
+            if window[s[r]] == t_count.get(s[r], 0):
+                have += 1
+            # print(have, need)
+            while have == need:
+                # print("got here")
+                # print(s[l:r+1])
+                if r - l < j - i:
+                    i , j = l , r   + 1
+                    flag = True
+                if window[s[l]] == t_count.get(s[l] , 0):
+                    have -= 1
+                window[s[l]] -= 1
+                l += 1
+        
+        if not flag:
+            return ""
+        return s[i:j]
+                
+            # 'baabc'
