@@ -1,0 +1,25 @@
+class Solution:
+    def timeRequiredToBuy(self, tickets: List[int], k: int) -> int:
+        
+        r_ticket = [(ticket,idx) for idx,ticket in enumerate(tickets)]
+        
+        q = deque(r_ticket)
+        
+        second = 0
+        
+        
+        
+        while  q:
+            second += 1
+            ticket , idx = q.popleft()
+            if ticket - 1:
+                q.append((ticket-1 , idx))
+            else:
+                if idx == k:
+                    return second
+                
+            
+            
+        
+        
+        
