@@ -1,0 +1,8 @@
+class Solution:
+    def runningSum(self, nums: List[int]) -> List[int]:
+        the_list = []
+        for index, item in enumerate(nums):
+            the_list.append(sum(nums[:index+1]))
+        return the_list
+        
+        
