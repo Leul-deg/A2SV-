@@ -1,0 +1,26 @@
+class TopVotedCandidate:
+
+    def __init__(self, persons: List[int], times: List[int]):
+        stack = [persons[0]]
+        self.persons=  persons
+        self.times = times
+        hashmap = {}
+        
+        for idx , person in enumerate(persons):
+            hashmap[person] = hashmap.get(person, 0 ) + 1
+            if hashmap[stack[-1]] <= hashmap[person]:
+                stack = [person]
+                self.persons[idx] = person
+            else:
+                self.persons[idx] = stack[-1]
+            
+        self.persons.append(self.persons[-1])
+        # print(self.persons)
+
+    def q(self, t: int) -> int:
+        return self.persons[bisect_right(self.times , t) - 1]
+
+
+# Your TopVotedCandidate object will be instantiated and called as such:
+# obj = TopVotedCandidate(persons, times)
+# param_1 = obj.q(t)
