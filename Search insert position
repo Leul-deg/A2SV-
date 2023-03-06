@@ -1,0 +1,6 @@
+class Solution:
+    def searchInsert(self, nums: List[int], target: int) -> int:
+        if target not in nums:
+            return bisect_left(nums, target)
+        
+        return nums.index(target)
