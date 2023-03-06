@@ -1,0 +1,14 @@
+class Solution:
+    def numSubarraysWithSum(self, nums: List[int], goal: int) -> int:
+        prefix = 0
+        prefix_count  = {0:1}
+        target = goal
+        count = 0
+        for num in nums:
+            prefix += num
+            needed = prefix - target
+            count += prefix_count.get(needed , 0)
+            
+            prefix_count[prefix]  = prefix_count.get(prefix , 0) + 1
+        
+        return count
