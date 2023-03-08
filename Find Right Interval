@@ -1,0 +1,30 @@
+class Solution:
+    def findRightInterval(self, intervals: List[List[int]]) -> List[int]:
+        n_i = [[t[0], idx] for idx , t in enumerate(intervals)]
+        start_s = sorted(n_i , key  = lambda x  : x[0])
+        # n = len()
+        ans = []
+        for start , end in intervals:
+            
+            #the left_most start >= current end
+            
+            l  , r, res  = 0 , len(intervals)-1 , float('inf')
+            
+            while l <= r:
+                mid = (l + r) // 2
+                
+                if start_s[mid][0] >= end:
+                    res = min(start_s[mid][-1] , res)
+                    r = mid - 1
+                
+                else:
+                    l = mid + 1
+            if res != float('inf'):  
+                ans.append(res)
+            else:
+                ans.append(-1)
+
+                
+        
+        return ans
+            
