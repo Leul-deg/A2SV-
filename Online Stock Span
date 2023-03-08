@@ -1,0 +1,13 @@
+class StockSpanner:
+    def __init__(self):
+        self.span = []
+
+    def next(self, price: int) -> int:
+        if not self.span:
+            self.span.append([-1,price])
+            return 1
+        idx = len(self.span) - 1
+        while price >= self.span[idx][-1] and idx != -1:
+            idx = self.span[idx][0]
+        self.span.append([idx,price])
+        return len(self.span) - 1 - idx 
