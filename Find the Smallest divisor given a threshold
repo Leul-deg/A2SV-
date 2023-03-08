@@ -1,0 +1,28 @@
+class Solution:
+    def smallestDivisor(self, nums: List[int], threshold: int) -> int:
+        def find_sum(divisor):
+            sum_ = 0 
+            for num in nums:
+                sum_ += math.ceil(num/divisor)
+            
+            return sum_
+        
+        l , r = 1 , max(nums)
+        res = 0
+        while l <= r:
+            
+            mid = (l+r)//2
+            s = find_sum(mid)
+            
+            if s > threshold:
+                l = mid + 1
+            
+            elif s <= threshold:
+                r = mid -  1
+                res = mid
+            
+            
+                
+        
+        
+        return res
