@@ -1,0 +1,26 @@
+class Solution:
+    def distributeCookies(self, cookies: List[int], k: int) -> int:
+        minimum = float('inf')
+        
+        def backtrack(idx , arr):
+            nonlocal minimum
+            if idx == len(cookies) or max(cookies) > minimum:
+                if min(arr) != 0:
+                    minimum = min(minimum , max(arr))
+                return
+            
+            rem_cook = len(cookies) - idx
+            kids = arr.count(0)
+            if rem_cook < kids:
+                return 
+            
+            for i in range(k):
+                
+                arr[i] += cookies[idx]
+                backtrack(idx + 1 ,arr)
+                arr[i] -= cookies[idx]
+        backtrack(0 , [0]*k)
+        return minimum
+            
+            
+        
