@@ -1,0 +1,40 @@
+class Solution:
+    def maximumRequests(self, n: int, requests: List[List[int]]) -> int:
+        def check(hashmap):
+            for key in hashmap:
+                if hashmap[key] != 0:
+                    return False
+            
+            return True
+        res = 0
+        hashmap = {}
+        def backtrack(idx , emp):
+            nonlocal res
+
+            if check(hashmap):
+                res = max(res , emp)
+            if idx >= len(requests):
+                return 
+            
+            #not include idx
+            backtrack(idx+1 , emp)
+            
+            hashmap[requests[idx][0]] = hashmap.get(requests[idx][0] , 0 )-1  
+            hashmap[requests[idx][1]] = hashmap.get(requests[idx][1] , 0) + 1
+            
+            
+                                                                                 
+                                                                                                                    
+            #include idx
+            backtrack(idx + 1 , emp + 1)
+            
+            #correct that b...
+            hashmap[requests[idx][0]] = hashmap.get(requests[idx][0] , 0 )+1  
+            hashmap[requests[idx][1]] = hashmap.get(requests[idx][1] , 0) - 1
+            
+            
+            # print(emp , hashmap )
+        backtrack(0  , 0 )
+        return res
+            
+        
