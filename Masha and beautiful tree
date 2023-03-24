@@ -1,0 +1,20 @@
+t = int(input())
+for _ in range(t):
+    m = int(input())
+    arr = list(map(int , input().split()))
+    arr = [[num] for num in arr]
+    ops = 0
+    while len(arr) > 1:
+        new = []
+        for idx in range(0, len(arr)  , 2):
+            if arr[idx][0] > arr[idx+1][0]:
+                ops += 1
+                arr[idx] , arr[idx + 1] = arr[idx + 1] , arr[idx]
+            new.append(arr[idx] + arr[idx+1])
+        
+        arr = new
+    
+    if arr[0] == sorted(arr[0]):
+        print(ops)
+    else:
+        print(-1)
