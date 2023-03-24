@@ -1,0 +1,32 @@
+rounds , k = list(map(int, input().split()))
+players = list(map(int, input().split()))
+def find_winners(l = 0 , r = len(players) - 1):
+    if l == r:
+        return [l]
+    
+    mid = (l + r) // 2
+    left = find_winners(l , mid)
+    right = find_winners(mid + 1 , r)
+
+    right_min = min([players[idx] for idx in right])
+    left_min = min([players[idx] for idx in left])
+
+    #merge this thing
+    pos = []
+    # print(left, right)
+
+    for rating in left:
+        if players[rating] > right_min or abs(players[rating] - right_min) <= k :
+            pos.append(rating)
+    
+    for rating in right:
+        if players[rating] > left_min or abs(players[rating] - left_min) <= k:
+            pos.append(rating) 
+    
+    # print(pos)
+    
+    return pos
+    
+
+ans = find_winners()
+print(*[idx  + 1 for idx in ans])
