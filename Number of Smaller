@@ -1,0 +1,12 @@
+n , m = list(map(int , input().split()))
+one , two = list(map(int , input().split())), list(map(int , input().split()))
+l , r = 0 , 0
+j = 0
+res = [ ]
+for idx in range(m):
+    while j < n and one[j] < two[idx]:
+        j += 1
+    
+    res.append(j)
+ 
+print(*res)
