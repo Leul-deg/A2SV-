@@ -1,0 +1,16 @@
+n , m = list(map(int , input().split()))
+one , two = list(map(int , input().split())), list(map(int , input().split()))
+l , r = 0 , 0
+merged = [] 
+while l < n and r < m:
+    if one[l] < two[r]:
+        merged.append(one[l])
+        l += 1
+    
+    else:
+        merged.append(two[r])
+        r += 1
+
+merged = merged + one[l:]
+merged = merged + two[r:]
+print(*merged)
