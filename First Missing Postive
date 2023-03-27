@@ -1,0 +1,22 @@
+class Solution:
+    def firstMissingPositive(self, nums: List[int]) -> int:
+        n = len(nums)
+        for idx , num in enumerate(nums):
+            if num < 1:
+                nums[idx] = n + 10
+            
+        # print(nums)
+        
+        for idx, num in enumerate(nums):
+            
+            if abs(num) <= n:
+                nums[abs(num)-1] = -1*abs(nums[abs(num)-1])
+        
+        # print(nums)
+        
+        for idx , num in enumerate(nums):
+            if num > 0:
+                return idx + 1
+        
+        return len(nums) + 1
+                
