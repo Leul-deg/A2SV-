@@ -1,0 +1,46 @@
+class Solution:
+    def numberOfPairs(self, nums1: List[int], nums2: List[int], diff: int) -> int:
+        
+        nums = [nums1[i] - nums2[i]  for i in range(len(nums2))]
+        
+        res  = 0
+        def mergeSort(l= 0  , r  = len(nums)-1 ):
+            nonlocal res
+            if l == r:
+                return [nums[l]]
+            
+            mid = (l + r) //2
+            left = mergeSort(l , mid)
+            right = mergeSort(mid+1 , r)
+            
+            #count
+            # print(left , j)
+            i , j = 0 , 0 
+            while j < len(right):
+                
+                # print(nums[j])
+                while i < len(left) and right[j] + diff >= left[i]:
+                    i += 1
+                
+                res += i
+                j += 1
+            
+            
+            #merging 
+            l_p , r_p = 0 ,  0 
+            merged = [ ]
+            while l_p < len(left) and r_p < len(right):
+                if left[l_p] < right[r_p]:
+                    merged.append(left[l_p])
+                    l_p += 1
+                else:
+                    merged.append(right[r_p])
+                    r_p += 1
+            
+            merged = merged + left[l_p:]
+            merged = merged + right[r_p:]
+            return merged 
+        
+        
+        mergeSort()
+        return res
