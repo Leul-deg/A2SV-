@@ -1,0 +1,48 @@
+class Solution:
+    def candy(self, ratings: List[int]) -> int:
+        
+        res = [0] * len(ratings)
+        def increasing(start):
+            
+            start += 1
+            while start < len(ratings) and ratings[start-1]<ratings[start]:
+                start += 1
+            
+            return start - 1
+            
+                
+            
+        
+        def decreasing(start):
+            
+            start += 1
+            while start < len(ratings) and ratings[start-1]>ratings[start]:
+                start += 1
+            
+            return start - 1
+        
+        
+        # print(increasing(0))
+        # print(decreasing(0))
+        
+        r = 0 
+        while r < len(ratings):
+            inc = increasing(r)
+            dec = decreasing(r)
+            
+            if inc >= dec:
+                s = 1 if r == 0 or ratings[r-1] == ratings[r] else 2
+                for idx in range(r , inc + 1):
+                    res[idx] = s
+                    s += 1
+            else:
+                s = 1
+                for idx in range(dec , r - 1 , -1):
+                    res[idx] = s
+                    s += 1
+            
+            r = max(inc , dec) + 1
+         
+        
+        # print(res)
+        return sum(res)
