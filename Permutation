@@ -1,0 +1,42 @@
+class Solution:
+    
+    def permute(self, nums: List[int]) -> List[List[int]]:
+        
+        have = 2**len(nums) -1
+            
+        
+        res = []
+        def backtrack(store, have):
+            
+            if not have :
+                
+                res.append(store)
+                return 
+            
+            for idx , num in enumerate(nums):
+                
+                #before using the idxth element check if idx +  1 is on
+                
+                if have>>(idx) & 1:
+                    
+                    #use the element
+                    
+                    new = have - (2**idx)
+                    store.append(num)
+                    
+                    backtrack(store.copy() , new )
+                    store.pop()
+                    
+                    
+
+                    
+                    
+                    
+                    
+                
+                
+            
+                
+        backtrack([] , have)
+        return res
+    
