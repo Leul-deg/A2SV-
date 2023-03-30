@@ -1,0 +1,17 @@
+class Solution:
+    def findComplement(self, num: int) -> int:
+        binary = str(bin(num))[2:]
+        val  = 1
+        
+        idx = len(binary) - 1
+        change = 0 
+        while idx >= 0:
+            if binary[idx] == '1':
+                change -= val
+            else:
+                change += val
+            # print(binary[idx])
+            val *= 2
+            idx -= 1
+        
+        return num + change 
