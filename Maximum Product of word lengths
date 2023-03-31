@@ -1,0 +1,28 @@
+class Solution:
+    def maxProduct(self, words: List[str]) -> int:
+        
+        for idx, word in enumerate(words):
+            n = 0
+            for char in word:
+                bit = ord(char) - 97
+                #if that bit is not on already ... turn it on
+                if not (n>>bit & 1):
+                    n += 2**bit
+            
+            words[idx] = [n , len(word)]
+        
+        max_ = 0
+        
+        for idx in range(len(words)):
+            for  j in range(idx + 1 , len(words)):
+                if not(words[idx][0] & words[j][0]):
+                    max_ = max(max_ , words[idx][1] * words[j][1])
+        
+        
+                
+                
+                
+                
+        # print(max_)
+                    
+        return max_
