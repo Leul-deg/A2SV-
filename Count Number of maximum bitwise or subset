@@ -1,0 +1,26 @@
+class Solution:
+    def countMaxOrSubsets(self, nums: List[int]) -> int:
+        maximum = reduce(lambda a , b : a | b , nums)
+        
+        res =  0 
+        def backtrack(idx , store):
+            nonlocal maximum
+            nonlocal res
+            
+            cur = reduce(lambda a , b : a | b , store , 0 )
+            
+            if cur == maximum:
+                res += 1
+            
+            if idx == len(nums):
+                return 
+            
+            for i in range(idx  ,len(nums)):
+                backtrack(i + 1  ,store + [nums[i]])
+            
+            
+            
+        backtrack(0 , [])
+        return res
+            
+            
