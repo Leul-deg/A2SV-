@@ -1,0 +1,19 @@
+class Solution(object):
+        def hasGroupsSizeX(self, deck):
+            
+            def gcd(a , b ):
+                
+                while b % a : b, a = a , b % a 
+                
+                return a 
+            
+            vals = Counter(deck).values()
+            return reduce(gcd , vals) > 1
+        #lee
+           
+
+                
+        
+
+        
+        
