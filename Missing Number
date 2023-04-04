@@ -1,0 +1,31 @@
+class Solution:
+    def missingNumber(self, nums: List[int]) -> int:
+        
+        nums = [-1] + nums
+        maximum = max(nums)
+        
+        idx = nums.index(maximum)
+        
+        nums[idx] , nums[-1] = nums[-1] , nums[idx]
+        
+        for idx in range( len(nums)  - 1):
+            moves = 0 
+            while idx != nums[idx] and moves < len(nums) + 3:
+                
+                num = nums[idx]
+                #nums[idx] --- nums[nums]
+                nums[idx] , nums[num] = nums[num] , nums[idx]
+                
+                moves += 1
+            
+        
+        
+        for idx in range(len(nums)):
+            if idx != nums[idx]:
+                return idx
+        
+        return len(nums)
+    
+    
+            
+            
