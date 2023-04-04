@@ -1,0 +1,50 @@
+class Solution:
+    def subarrayGCD(self, nums: List[int], k: int) -> int:
+        
+        def inter(one , two):
+            res = {}
+            for key in one:
+                if two.get(key):
+                    res[key] = min(one[key] , two[key])
+            
+            return res
+                    
+                    
+        
+        def prime_factorization(n: int):
+            
+                factor = {}
+                d = 2
+                while d * d <= n:
+                    while n % d == 0:
+                        factor[d] = factor.get(d , 0) + 1
+                        n //= d
+                    d += 1
+                if n > 1:
+                    factor[n] = 1
+
+                return factor
+            
+        
+        for idx in range(len(nums)):
+            nums[idx]  = prime_factorization(nums[idx])
+        
+        #farming
+        k = prime_factorization(k)
+        count = 0 
+        for idx in range(len(nums)):
+            prev = nums[idx]
+            
+            for j in range(idx , len(nums)):
+                prev = inter(prev , nums[j])
+                if prev == k:
+                    count += 1
+                    # print(idx , j)
+                if len(prev) < len(k):
+                    break
+        
+        return count
+            
+        
+        
+        
