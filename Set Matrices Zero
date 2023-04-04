@@ -1,0 +1,30 @@
+class Solution:
+    def setZeroes(self, matrix: List[List[int]]) -> None:
+        """
+        Do not return anything, modify matrix in-place instead.
+        """
+        def zero(i , j, r , c ):
+            
+            while r in range(len(matrix)) and c in range(len(matrix[0])):
+                matrix[r][c] = 0
+                r += i
+                c += j
+        
+        
+        z = []
+        for row in range(len(matrix)):
+            for col in range(len(matrix[0])):
+                if matrix[row][col] == 0:
+                    z.append((row, col))
+        
+        
+        for row , col in z:
+            zero(1, 0 , row , col)
+            zero(-1, 0 , row , col)
+            zero(0, 1 , row , col)
+            zero(0, -1 , row , col)
+        
+        
+
+            
+        
