@@ -1,0 +1,42 @@
+def get_sum(grid , r , c , i , j ): 
+    
+    summ = 0
+    while r in range(rowNum) and c in range(colNum):
+        summ += grid[r][c]
+        r += i 
+        c -= j
+
+    return summ
+n = int(input())
+
+for _ in range(n):
+    
+    rowNum, colNum = map(int,input().split())
+
+    lst = []
+    for _ in range(rowNum):
+        rows = list(map(int, input().split()))
+        lst.append(rows)
+
+    max_ = 0
+    for row in range(rowNum):
+        for col in range(colNum):
+            sum_ = 0
+            #top right
+            sum_ += get_sum(lst , row , col  , -1 , 1 )
+            #bottom right
+            sum_ += get_sum(lst ,row,  col  , 1 ,1 )
+            #bottom left
+            sum_ += get_sum(lst ,  row , col , 1 , - 1)
+            #top left
+            sum_ += get_sum(lst ,  row , col , -1 , -1)
+            sum_ -= 3 * lst[row][col]
+            # sum__ 
+
+            max_ = max(max_ , sum_)
+    
+    print(max_)
+
+
+
+       
