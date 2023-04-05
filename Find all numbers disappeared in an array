@@ -1,0 +1,18 @@
+class Solution:
+    def findDisappearedNumbers(self, nums: List[int]) -> List[int]:
+        nums = [0] + nums
+        
+        for idx in range(len(nums)):
+            
+            while idx != nums[idx] and nums[nums[idx]] != nums[idx]:
+                num = nums[idx]
+                #nums[idx ] --- nums[num]
+                
+                nums[idx] , nums[num] = nums[num]  , nums[idx]
+                
+        
+        # print(nums)
+        return [idx for idx in range(len(nums)) if idx != nums[idx]]
+            
+        
+    
