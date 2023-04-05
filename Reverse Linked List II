@@ -1,0 +1,55 @@
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def reverseBetween(self, head: Optional[ListNode], left: int, right: int) -> Optional[ListNode]:
+        
+        
+        def reverse(strt , frd ):
+            
+            prv = None
+            bgn = strt
+            curr = strt
+            
+            while frd:
+                nxt = curr.next
+                curr.next = prv 
+                prv = curr
+                curr = nxt 
+                frd -= 1
+            
+            f = curr.next
+            curr.next = prv
+            
+            bgn.next = f
+            
+            # print(curr ,"gud eko new ", curr.next)
+            return curr
+            
+            
+            
+        
+        
+        
+        
+        
+        
+        dummy = ListNode()
+        dummy.next= head
+        forward = right - left
+        
+        start = 1
+        
+        cur = dummy
+        
+        while start != left:
+            cur = cur.next
+            start += 1
+        
+        cur.next = reverse(cur.next , forward)
+        
+        return dummy.next
+        
+        
