@@ -1,0 +1,38 @@
+class Solution:
+    def maximalNetworkRank(self, n: int, roads: List[List[int]]) -> int:
+        
+        hashmap = {}
+        s = {tuple(k) for k in roads}
+        
+        for x , y in roads:
+            hashmap[x] = hashmap.get(x , 0) + 1
+            hashmap[y] = hashmap.get(y, 0) + 1
+        
+        tup =[[key , freq] for key , freq in hashmap.items()]
+        # tup.sort(key = lambda x : x[1])
+        res =  0
+        for i in range(len(tup)):
+            
+            for j in range( i + 1 , len(tup)):
+                
+                x ,  y = tup[i] , tup[j]
+                
+                n1 , f1 = x
+                n2 , f2 = y
+                
+                m = f1 + f2
+                if (n1 , n2) in s or (n2 , n1) in s:
+                    m -=  1
+                
+                res = max(m  ,res)
+        
+        # print(hashmap)
+        return res
+                    
+                
+                
+                
+                
+        
+
+        return 4
