@@ -1,0 +1,32 @@
+class Solution:
+    def partitionLabels(self, s: str) -> List[int]:
+        
+        non_zero = set()
+        res = []
+        
+        c =  Counter(s)
+        
+        l = 0 
+        for idx in range(len(s)):
+            
+            char = s[idx]
+            
+            c[char] -= 1
+            
+            if c[char] :
+                non_zero.add(char)
+            
+            else:
+                if char in non_zero:
+                    non_zero.remove(char)
+            
+            
+            if not non_zero:
+                res.append(idx - l + 1)
+                l = idx + 1
+        
+        
+        return res
+            
+            
+            
