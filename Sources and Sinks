@@ -1,0 +1,24 @@
+n = int(input())
+grid = []
+for _ in range(n):
+    grid.append(list(map(int , input().split())))
+
+
+source = [idx + 1 for idx in range(n) if sum(grid[idx]) == 0]
+sink = []
+for c in range(n):
+    sm = 0
+    for r in range(n):
+        sm += grid[r][c]
+    
+    if sm == 0:
+        sink.append(c + 1)
+
+print(len(sink) , *sink)
+print(len(source) , *source)
+
+
+
+
+
+
