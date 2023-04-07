@@ -1,0 +1,30 @@
+"""
+# Definition for a Node.
+class Node:
+    def __init__(self, val=None, children=None):
+        self.val = val
+        self.children = children
+"""
+
+class Solution:
+    def maxDepth(self, root: 'Node') -> int:
+        
+        level = 0 
+        visited = set()
+        
+        def dfs(node, dep):
+            
+            nonlocal level
+            if node in visited or not node:
+                return 
+            visited.add(node)
+            for ng in node.children:
+                dfs(ng , dep + 1)
+            
+            level = max(level , dep + 1)
+        
+        
+        dfs(root ,  0)
+        
+        return level
+            
