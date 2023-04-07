@@ -1,0 +1,36 @@
+"""
+# Definition for Employee.
+class Employee:
+    def __init__(self, id: int, importance: int, subordinates: List[int]):
+        self.id = id
+        self.importance = importance
+        self.subordinates = subordinates
+"""
+
+class Solution:
+    def getImportance(self, employees: List['Employee'], id: int) -> int:
+        
+        
+        hashmap = {em.id : em for em in employees}
+        visited = set()
+        ans = [0]
+        
+        def dfs(node):
+            if node in visited:
+                return
+            visited.add(node)
+            
+            for ng in node.subordinates:
+                dfs(hashmap[ng])
+            
+            ans[0] += node.importance
+        
+            
+            
+        
+        
+        for emp in employees:
+            if emp.id == id:
+                dfs(hashmap[emp.id])
+        
+        return ans[0]
