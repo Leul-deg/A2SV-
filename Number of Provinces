@@ -1,30 +1,26 @@
 class Solution:
     def findCircleNum(self, isConnected: List[List[int]]) -> int:
-        rows  , cols = len(isConnected) , len(isConnected[0])
         
-        d  = defaultdict(list)
-        for i in range(rows):
-            for j in range(cols):
-                if isConnected[i][j]:
-                    d[i+1].append(j + 1)
-                    d[j + 1].append(i + 1)
+        n = len(isConnected)
+        seen = set()
         
-        visited = set()
-        
-        def dfs(n):
-            if n in visited:
+        def dfs(node):
+            
+            if node in seen:
                 return
-            visited.add(n)
-            for a in d[n]:
+            
+            seen.add(node)
+            for c in range(n):
+                if isConnected[node][c]:
+                    dfs(c)
+        
+        
+        res = 0
+        for a in range(n):
+            if a not in seen:
                 dfs(a)
-            
-            
-        res = 0 
-        for node in range(1 , len(isConnected) + 1):
-            if node not in visited:
-                dfs(node)
                 res += 1
         
         return res
-        
-        
+                    
+                    
