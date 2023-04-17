@@ -1,0 +1,27 @@
+class Solution:
+    def minSubArrayLen(self, target: int, nums: List[int]) -> int:
+        prefix = [0]+list(accumulate(nums))
+        # print(prefix)
+        
+        
+        def binary_search(left , right):
+            given = prefix[right]
+            ans =  -1 * float('inf')
+            while left <= right:
+                mid =  (left + right)//2
+                if given- prefix[mid] >= target:
+                    ans = mid
+                    left = mid + 1
+                else:
+                    right = mid - 1
+            
+            # print(ans , 'finale' , prefix[right])
+            return ans
+        
+        res = float('inf')
+        for idx in range(len(prefix)):
+            res = min(idx - binary_search(0  ,  idx) , res)
+        
+        return res if res != float('inf') else 0
+            
+            
