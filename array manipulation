@@ -1,0 +1,15 @@
+def arrayManipulation(n, queries):
+    # Write your code here
+    prefix = [0] * (n + 2)
+    for q in queries:
+        q[0]-=1
+        
+        start , end , value = q
+        prefix[start] += value
+        prefix[end] -= value
+    _sum = 0
+    for idx , num in enumerate(prefix):
+        _sum += num
+        prefix[idx] = _sum
+    
+    return max(prefix)
