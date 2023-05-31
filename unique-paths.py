@@ -19,4 +19,22 @@ class Solution:
             memo[(r , c )] = res
 
             return res 
-        return dp(1 , 1)
+        
+        grid = [[0 for _ in range(n + 1)] for _ in range(m + 1)]
+        grid[0][0] = 1
+        # print(grid)
+        def getter( r  , c):
+            if r not in range(0 ,  m ) or c not in range(0 ,  n ):
+                return  0 
+            
+            return grid[r][c]
+
+        for i in range(m):
+            for j in range(n):
+                if i or j :
+                    grid[i][j] = getter(i - 1 , j ) + getter(i , j - 1)
+        
+        
+
+
+        return grid[m - 1 ][n - 1]
