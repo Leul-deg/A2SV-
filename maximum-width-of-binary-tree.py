@@ -1,0 +1,33 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def widthOfBinaryTree(self, root: Optional[TreeNode]) -> int:
+        hashmap = {}
+        ans = 0 
+        def traverse(node , r , c):
+            nonlocal ans
+            if not node:
+                return
+            
+            if r not in hashmap:
+                hashmap[r] = [float('inf') , float('-inf')]
+            
+            hashmap[r] = [min(hashmap[r][0] , c) ,  max(hashmap[r][1], c)]
+            
+            ans = max( ans , hashmap[r][1] - hashmap[r][0] + 1)
+            
+            traverse(node.left , r + 1,  2*c  )
+            traverse(node.right , r + 1 , 2*c + 1)
+            
+            
+            
+            
+            
+        
+        
+        traverse(root , 0 , 0 )
+        return ans
